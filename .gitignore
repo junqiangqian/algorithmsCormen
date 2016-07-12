@@ -1,6 +1,6 @@
 *.out
-./schedule.odt
-./Schedule.txt
+schedule.odt
+Schedule.txt
 ./.git/hooks/pre-applypatch.sample
 ./.git/hooks/applypatch-msg.sample
 ./.git/hooks/prepare-commit-msg.sample
