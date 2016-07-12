@@ -49,7 +49,7 @@ vector<int> merge(vector<int> v, vector<int> w) {
 }
 
 int main(int argc, char *argv[]) {
-  vector<int> v = {9, 8, 7, 6, 5, 1, 2, 3, 4, 10};
+  vector<int> v = {9, 8, 7, 6, 5, 1, 2, 3, 4, 10, 11, 12};
   vector<int> res = merge_sort(v);
   for (int i = 0; i < res.size(); i++) {
     cout << res[i] << " ";
