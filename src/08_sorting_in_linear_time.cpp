@@ -5,6 +5,11 @@
 
 using namespace std;
 
+/*
+   INPUT: a - vector to be sorted in ascending order
+          b - vector A sorted
+          k - maximum element in vector A
+*/
 template <typename T>
 void counting_sort(vector<T>& a, vector<T>& b, long long k) {
   vector<T> c(k + 1);
