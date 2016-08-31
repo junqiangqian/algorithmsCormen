@@ -89,13 +89,12 @@ LinkedListStack<T>::LinkedListStack(const LinkedListStack<T>& src) {
 
 template <class T>
 LinkedListStack<T>::~LinkedListStack() {
-    {
-        Node* nextPtr;
-        for (Node* curNodePtr = m_top; curNodePtr != nullptr; ) {
-            nextPtr = curNodePtr->m_next;
-            delete curNodePtr;
-            curNodePtr = nextPtr;
-        }
+    std::cout << "Destructor was called" << std::endl;
+    Node* nextPtr;
+    for (Node* curNodePtr = m_top; curNodePtr != nullptr; ) {
+        nextPtr = curNodePtr->m_next;
+        delete curNodePtr;
+        curNodePtr = nextPtr;
     }
 }
 
