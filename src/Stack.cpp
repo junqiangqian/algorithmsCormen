@@ -111,10 +111,10 @@ const T& LinkedListStack<T>::pop() {
     if (empty()) {
         throw std::out_of_range("Stack is empty");
     }
-    const T& result = top();
+    const T& top = top();
     m_top = m_top->m_next;
     m_size--;
-    return result;
+    return top;
 }
 
 template <class T>
