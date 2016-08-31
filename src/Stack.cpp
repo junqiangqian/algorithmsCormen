@@ -1,8 +1,4 @@
-#ifndef STACK_H
-#define STACK_H
-
 #include <iostream>
-#include <ostream>
 #include <stdio.h>
 #include <stdexcept>
 
@@ -126,5 +122,3 @@ template<class T>
 bool LinkedListStack<T>::empty() const {
     return m_size == 0;
 }
-
-#endif // STACK_H
