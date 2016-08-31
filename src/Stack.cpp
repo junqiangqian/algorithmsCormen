@@ -108,10 +108,7 @@ void LinkedListStack<T>::push(const T& value) {
 
 template <class T>
 const T& LinkedListStack<T>::pop() {
-    if (empty()) {
-        throw std::out_of_range("Stack is empty");
-    }
-    const T& top = top();
+    const T& top = LinkedListStack<T>::top();
     m_top = m_top->m_next;
     m_size--;
     return top;
