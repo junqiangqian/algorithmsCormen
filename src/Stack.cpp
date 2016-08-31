@@ -15,6 +15,7 @@ class LinkedListStack {
         LinkedListStack<T>& operator=(const LinkedListStack<T>& src);
         ~LinkedListStack();
         void push(const T& value);
+        const T& pop();
         const T& top() const;
         size_t size() const;
         bool empty() const;
@@ -103,6 +104,17 @@ void LinkedListStack<T>::push(const T& value) {
     Node* newNode = new Node(value, m_top);
     m_top = newNode;
     m_size++;
+}
+
+template <class T>
+const T& LinkedListStack<T>::pop() {
+    if (empty()) {
+        throw std::out_of_range("Stack is empty");
+    }
+    const T& result = top();
+    m_top = m_top->m_next;
+    m_size--;
+    return result;
 }
 
 template <class T>
