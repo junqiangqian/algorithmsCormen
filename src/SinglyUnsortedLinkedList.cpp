@@ -11,11 +11,17 @@ class LinkedList {
         struct Node;
         Node *m_head;
         size_t m_size;
+        LinkedList<T>* deepCopy(const LinkedList<T>& src);
     public:
         LinkedList() : m_head(nullptr), m_size(0) {}
-        Node* search(const T& key);
+        LinkedList(const LinkedList<T>& src);
+        LinkedList<T>& operator=(const LinkedList<T>& src);
+        ~LinkedList();
+        Node* search(const T& key) const;
         void insertHead(const T& key);
         void deleteNodeWithKey(const T& key);
+        size_t size() const;
+        bool empty() const;
 };
 
 template <class T>
@@ -36,8 +42,56 @@ std::ostream& operator<<(std::ostream& os, const LinkedList<T>& list) {
     return os;
 }
 
+template<class T>
+LinkedList<T>* LinkedList<T>::deepCopy(const LinkedList<T>& src) {
+    if (src.empty()) {
+        this->m_head = nullptr;
+        this->m_size = 0;
+    } else {
+        Node* iterator = src.m_head;
+        Node* newHead = new Node(iterator->m_value, nullptr);
+
+        this->m_head = newHead;
+
+        while (iterator->m_next != nullptr) {
+            iterator = iterator->m_next;
+            Node* newNode = new Node(iterator->m_value, nullptr);
+            newHead->m_next = newNode;
+            newHead = newHead->m_next;
+        }
+
+        this->m_size = src.m_size;
+    }
+}
+
+template<class T>
+LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& src) {
+    std::cout << "Assignment operator was called" << std::endl;
+    if (this == &src) {
+        return *this;
+    }
+    return *deepCopy(src);
+}
+
+template<class T>
+LinkedList<T>::LinkedList(const LinkedList<T>& src) {
+    std::cout << "Copy constructor is called" << std::endl;
+    deepCopy(src);
+}
+
+template<class T>
+LinkedList<T>::~LinkedList() {
+    std::cout << "Destructor was called" << std::endl;
+    Node* nextPtr;
+    for (Node* curNodePtr = m_head; curNodePtr != nullptr; ) {
+        nextPtr = curNodePtr->m_next;
+        delete curNodePtr;
+        curNodePtr = nextPtr;
+    }
+}
+
 template <class T>
-typename LinkedList<T>::Node* LinkedList<T>::search(const T& key) {
+typename LinkedList<T>::Node* LinkedList<T>::search(const T& key) const {
     Node *iterator = m_head;
     while (iterator != nullptr && iterator->m_value != key) {
         iterator = iterator->m_next;
@@ -78,4 +132,14 @@ void LinkedList<T>::deleteNodeWithKey(const T& key) {
         delete toDelete;
         m_size--;
     }
+}
+
+template<class T>
+size_t LinkedList<T>::size() const {
+    return this->m_size;
+}
+
+template<class T>
+bool LinkedList<T>::empty() const {
+    return m_size == 0;
 }
